@@ -135,41 +135,44 @@ export function Calendar() {
         }}
       />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="flex justify-between items-center mb-10">
-          <h2
-            ref={titleRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold uppercase italic text-[#303285] dark:text-white flex items-center"
-            style={{ fontFamily: 'Teko, sans-serif' }}
-          >
-            <span className="w-2 h-10 bg-[#ff4422] mr-4 inline-block transform -skew-x-12" />
-            Etapas 2026
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+          <div className="relative">
+            <h2
+              ref={titleRef}
+              className="text-5xl md:text-7xl lg:text-8xl font-display font-bold uppercase italic text-[#303285] dark:text-white flex items-center leading-none tracking-tighter"
+              style={{ fontFamily: 'Teko, sans-serif' }}
+            >
+              <span className="w-3 h-12 md:h-16 bg-[#ff4422] mr-4 inline-block transform -skew-x-12 shadow-[0_0_15px_rgba(255,68,34,0.5)]" />
+              Etapas 2026
+            </h2>
+            <div className="h-1 w-full bg-gradient-to-r from-[#ff4422] to-transparent mt-2 opacity-50" />
+          </div>
 
-          {/* Navigation arrows - IMPROVED VISIBILITY */}
-          <div className="flex space-x-3">
+          {/* Navigation arrows - RACING STYLE */}
+          <div className="flex space-x-4 self-end md:self-auto">
             <button
               onClick={() => scrollCards('left')}
-              className="p-3 bg-[#303285] text-white rounded-full shadow-lg 
-                         border-2 border-transparent
-                         hover:bg-[#ff4422] hover:border-[#ff4422] hover:shadow-[#ff4422]/30 hover:shadow-xl
-                         active:scale-95
-                         transition-all duration-300"
+              className="group p-4 bg-white/5 dark:bg-white/10 backdrop-blur-md text-[#303285] dark:text-white rounded-xl 
+                         border border-white/20 shadow-xl
+                         hover:bg-[#ff4422] hover:text-white hover:border-[#ff4422] hover:shadow-[#ff4422]/40
+                         active:scale-90
+                         transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
               aria-label="Etapa anterior"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => scrollCards('right')}
-              className="p-3 bg-[#303285] text-white rounded-full shadow-lg 
-                         border-2 border-transparent
-                         hover:bg-[#ff4422] hover:border-[#ff4422] hover:shadow-[#ff4422]/30 hover:shadow-xl
-                         active:scale-95
-                         transition-all duration-300"
+              className="group p-4 bg-white/5 dark:bg-white/10 backdrop-blur-md text-[#303285] dark:text-white rounded-xl 
+                         border border-white/20 shadow-xl
+                         hover:bg-[#ff4422] hover:text-white hover:border-[#ff4422] hover:shadow-[#ff4422]/40
+                         active:scale-90
+                         transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
               aria-label="Próxima etapa"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
@@ -177,7 +180,7 @@ export function Calendar() {
         {/* Cards container */}
         <div
           ref={cardsContainerRef}
-          className="flex overflow-x-auto space-x-6 pb-6 px-2 scrollbar-hide snap-x snap-mandatory"
+          className="flex overflow-x-auto space-x-8 pb-12 px-4 scrollbar-hide snap-x snap-mandatory mask-fade-edges"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {stages.map((stage, index) => (
@@ -186,31 +189,36 @@ export function Calendar() {
               className="stage-card snap-start flex-shrink-0"
               intensity={stage.active ? 'high' : 'low'}
             >
-              {/* UNIFORM SIZE CARD with Flexbox */}
               <div
                 className={`
-                  bg-white dark:bg-[#262626] rounded-xl overflow-hidden
-                  border border-gray-100 dark:border-gray-700
-                  w-56 h-72
+                  relative group/card
+                  bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden
+                  border border-white/20 dark:border-white/10
+                  w-64 h-80
                   flex flex-col
-                  shadow-md
-                  transition-all duration-300 ease-out
-                  hover:shadow-xl hover:-translate-y-2
-                  ${stage.active ? 'ring-2 ring-[#ff4422] shadow-lg shadow-[#ff4422]/10' : ''}
+                  shadow-[0_8px_32px_rgba(0,0,0,0.12)]
+                  transition-all duration-500 cubic-bezier(0.34,1.56,0.64,1)
+                  hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]
+                  ${stage.active ? 'ring-2 ring-[#ff4422] ring-offset-4 ring-offset-gray-50 dark:ring-offset-[#1a1a1a] scale-105 z-10' : 'opacity-80 hover:opacity-100'}
                 `}
               >
-                {/* Top stripe */}
+                {/* Visual Accent for Active Stage */}
+                {stage.active && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#ff4422]/10 to-transparent pointer-events-none" />
+                )}
+
+                {/* Top decorative bar */}
                 <div
-                  className={`h-2 flex-shrink-0 ${stage.active ? 'bg-[#ff4422]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                  className={`h-1.5 flex-shrink-0 ${stage.active ? 'bg-[#ff4422] shadow-[0_0_10px_#ff4422]' : 'bg-gray-200 dark:bg-gray-800'}`}
                 />
 
-                {/* Card content with flex-grow for uniform spacing */}
-                <div className="p-5 text-center flex flex-col flex-grow">
-                  {/* Date Section - fixed height */}
-                  <div className="flex-shrink-0">
+                {/* Card Content */}
+                <div className="p-6 text-center flex flex-col flex-grow items-center">
+                  {/* Date Section */}
+                  <div className="relative mb-4">
                     <div className="flex items-baseline justify-center">
                       <span
-                        className={`font-display font-bold text-6xl leading-none ${stage.active ? 'text-[#ff4422]' : 'text-gray-800 dark:text-gray-200'
+                        className={`font-display font-bold text-7xl leading-none tracking-tighter ${stage.active ? 'text-[#ff4422] drop-shadow-[0_0_10px_rgba(255,68,34,0.3)]' : 'text-[#303285] dark:text-gray-300'
                           }`}
                         style={{ fontFamily: 'Teko, sans-serif' }}
                       >
@@ -218,48 +226,50 @@ export function Calendar() {
                       </span>
                     </div>
                     <div
-                      className="text-gray-500 dark:text-gray-400 font-display text-2xl uppercase tracking-widest mt-1"
-                      style={{ fontFamily: 'Teko, sans-serif' }}
+                      className={`text-sm font-bold uppercase tracking-[0.2em] -mt-1 ${stage.active ? 'text-[#ff4422]' : 'text-gray-500'}`}
                     >
                       {stage.month}
                     </div>
                   </div>
 
-                  <hr className="border-gray-200 dark:border-gray-700 my-3 flex-shrink-0" />
+                  {/* Separator with dynamic width */}
+                  <div className={`h-[1px] w-1/2 mx-auto transition-all duration-500 group-hover/card:w-full ${stage.active ? 'bg-[#ff4422]/40' : 'bg-gray-200 dark:bg-gray-800'} my-4`} />
 
-                  {/* Stage info - grows to fill space */}
-                  <div className="flex-grow flex flex-col justify-center">
-                    <div className="text-base font-bold text-gray-800 dark:text-white uppercase mb-1 flex items-center justify-center gap-2">
-                      <CalendarIcon className="text-[#ff4422] flex-shrink-0" style={{ width: '16px', height: '16px' }} />
+                  {/* Stage Info */}
+                  <div className="flex-grow flex flex-col justify-center w-full">
+                    <h3 className="text-lg font-black text-[#303285] dark:text-white uppercase line-clamp-2 leading-tight mb-2 flex items-center justify-center gap-2">
+                      <CalendarIcon className={`${stage.active ? 'text-[#ff4422]' : 'text-[#303285]/60'} flex-shrink-0 size-4`} />
                       {stage.name}
-                    </div>
+                    </h3>
                     <div
-                      className={`font-display text-xl uppercase flex items-center justify-center gap-2 ${stage.active ? 'text-[#ff4422]' : 'text-gray-600 dark:text-gray-400'
+                      className={`font-display text-xl uppercase italic flex items-center justify-center gap-2 ${stage.active ? 'text-[#ff4422]' : 'text-gray-600 dark:text-gray-400'
                         }`}
                       style={{ fontFamily: 'Teko, sans-serif' }}
                     >
-                      <MapPin size={16} className="flex-shrink-0" />
+                      <MapPin size={16} className="text-[#ff4422]" />
                       {stage.location}
                     </div>
                   </div>
 
-                  {/* Active indicator - fixed at bottom */}
-                  <div className="flex-shrink-0 h-10 flex items-center justify-center">
+                  {/* Action Button / Badge */}
+                  <div className="mt-4 w-full h-12 flex items-center justify-center">
                     {stage.active ? (
                       <button
-                        className="inline-flex items-center gap-2 px-4 py-2 
-                                   bg-[#ff4422] text-white rounded-full text-sm font-bold uppercase
-                                   shadow-lg shadow-[#ff4422]/30
-                                   hover:bg-[#ff6644] hover:shadow-xl hover:shadow-[#ff4422]/40
-                                   transition-all duration-300
-                                   transform hover:scale-105"
+                        className="w-full py-2.5 
+                                   bg-[#ff4422] text-white rounded-lg text-lg font-bold uppercase italic
+                                   shadow-[0_4px_15px_rgba(255,68,34,0.4)]
+                                   hover:bg-[#ff5533] hover:shadow-[0_8px_25px_rgba(255,68,34,0.5)]
+                                   transition-all duration-300 transform active:scale-95
+                                   flex items-center justify-center gap-2"
                         style={{ fontFamily: 'Teko, sans-serif', letterSpacing: '0.05em' }}
                       >
-                        <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                        Próxima Etapa
+                        <span className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
+                        PRÓXIMA ETAPA
                       </button>
                     ) : (
-                      <div className="h-8" /> /* Spacer for non-active cards */
+                      <span className="text-xs font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">
+                        ETAPA CONCLUÍDA
+                      </span>
                     )}
                   </div>
                 </div>
@@ -268,17 +278,24 @@ export function Calendar() {
           ))}
         </div>
 
-        {/* Progress indicator */}
-        <div className="flex justify-center mt-6 gap-2">
+        {/* Improved Progress Dots */}
+        <div className="flex justify-center mt-4 gap-3">
           {stages.map((stage, index) => (
-            <div
+            <button
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${stage.active ? 'bg-[#ff4422] w-8' : 'bg-gray-300 dark:bg-gray-600 w-2 hover:bg-gray-400'
+              className={`h-2 rounded-full transition-all duration-500 
+                ${stage.active 
+                  ? 'bg-[#ff4422] w-12 shadow-[0_0_10px_#ff4422]' 
+                  : 'bg-gray-300 dark:bg-gray-700 w-3 hover:bg-[#ff4422]/30'
                 }`}
+              onClick={() => {
+                cardsContainerRef.current?.children[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+              }}
             />
           ))}
         </div>
       </div>
+
 
       {/* Background decoration */}
       <div className="absolute top-1/2 right-0 w-64 h-64 bg-[#ff4422]/5 rounded-full blur-3xl pointer-events-none" />

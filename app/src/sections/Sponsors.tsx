@@ -101,104 +101,130 @@ export function Sponsors() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       id="sponsors"
-      className="py-12 md:py-16 bg-white dark:bg-[#262626] border-t border-gray-200 dark:border-gray-800 relative overflow-hidden"
+      className="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4">
-        {/* Title */}
-        <h3 
-          ref={titleRef}
-          className="text-2xl md:text-3xl font-display uppercase font-bold text-gray-400 mb-10 text-center"
-          style={{ fontFamily: 'Teko, sans-serif' }}
-        >
-          Patrocinadores Oficiais
-        </h3>
+      {/* Background Subtle Gradient */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+      </div>
 
-        {/* Sponsors Grid */}
-        <div 
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header Label */}
+        <div className="flex items-center justify-center gap-4 mb-12">
+          <div className="h-px w-12 bg-white/20" />
+          <h3
+            ref={titleRef}
+            className="text-xl md:text-2xl font-display uppercase font-black text-white/40 tracking-[0.4em]"
+            style={{ fontFamily: 'Teko, sans-serif' }}
+          >
+            Patrocinadores Oficiais
+          </h3>
+          <div className="h-px w-12 bg-white/20" />
+        </div>
+
+        {/* Premium Sponsors Grid */}
+        <div
           ref={sponsorsRef}
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-16"
+          className="flex flex-wrap justify-center items-center gap-6 md:gap-12 mb-20"
         >
           {sponsors.map((sponsor) => {
             const Icon = sponsor.icon;
             return (
-              <div 
+              <div
                 key={sponsor.name}
-                className="sponsor-item group flex items-center space-x-3 cursor-pointer transition-all duration-300 hover:scale-110"
+                className="sponsor-item group relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
               >
-                <div 
-                  className="p-3 rounded-lg transition-all duration-300 group-hover:shadow-lg"
-                  style={{ 
-                    backgroundColor: `${sponsor.color}20`,
+                {/* Sponsor Icon with colored glow */}
+                <div
+                  className="p-3 rounded-xl transition-all duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundColor: `${sponsor.color}15`,
+                    boxShadow: `0 0 20px ${sponsor.color}20`
                   }}
                 >
-                  <Icon 
-                    className="text-3xl md:text-4xl transition-colors duration-300"
+                  <Icon
+                    className="transition-colors duration-500"
                     style={{ color: sponsor.color }}
                     size={32}
                   />
                 </div>
-                <span 
-                  className="font-bold text-lg md:text-xl text-gray-700 dark:text-gray-300 group-hover:text-[#ff4422] transition-colors"
-                >
-                  {sponsor.name}
-                </span>
+
+                {/* Sponsor Name */}
+                <div className="flex flex-col">
+                  <span
+                    className="font-display font-bold text-2xl text-white/80 group-hover:text-white transition-colors tracking-tight leading-none"
+                    style={{ fontFamily: 'Teko, sans-serif' }}
+                  >
+                    {sponsor.name}
+                  </span>
+                  <span className="text-[8px] font-black text-white/20 tracking-[0.2em] uppercase mt-1">Official Partner</span>
+                </div>
+
+                {/* Hover line accent */}
+                <div
+                  className="absolute bottom-0 left-4 right-4 h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                  style={{ backgroundColor: sponsor.color, boxShadow: `0 0 10px ${sponsor.color}` }}
+                />
               </div>
             );
           })}
         </div>
 
-        {/* Sponsor Banner */}
-        <div 
+        {/* High-End Sponsor Banner Call to Action */}
+        <div
           ref={bannerRef}
-          className="mt-12 relative overflow-hidden rounded-xl"
+          className="relative max-w-5xl mx-auto group"
         >
-          <div className="bg-gradient-to-r from-[#303285] via-[#ff4422] to-[#303285] p-1">
-            <div className="bg-white dark:bg-[#1a1a1a] rounded-lg p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <h4 
-                  className="text-2xl md:text-3xl font-display font-bold text-[#303285] dark:text-white mb-2"
+          {/* Animated Glow Backdrop */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#ff4422] via-[#303285] to-[#F5B500] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-pulse" />
+
+          <div className="relative bg-[#0d0d0d] rounded-[2.5rem] p-10 md:p-14 overflow-hidden border border-white/10">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-[0.03] carbon-fiber pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="text-center lg:text-left flex-1">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#ff4422] text-xs font-black uppercase tracking-[0.3em] mb-6">
+                  OPORTUNIDADE DE PARCERIA
+                </div>
+                <h4
+                  className="text-4xl md:text-6xl font-display font-black text-white mb-6 uppercase italic leading-none"
                   style={{ fontFamily: 'Teko, sans-serif' }}
                 >
-                  Seja um Patrocinador
+                  Acelere sua marca <br /> <span className="text-[#ff4422]">no topo do pódio</span>
                 </h4>
-                <p className="text-gray-600 dark:text-gray-400 max-w-md">
-                  Junte-se aos maiores nomes do automobilismo e alcance milhares de fãs apaixonados por velocidade.
+                <p className="text-gray-400 text-lg md:text-xl max-w-xl leading-relaxed">
+                  Junte-se à temporada 2026 do RKT Raceman Kart e alcance uma audiência apaixonada no maior campeonato de kart amador do Brasil.
                 </p>
               </div>
-              <button 
-                className="bg-[#ff4422] hover:bg-[#ff6644] text-white font-display uppercase text-lg px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#ff4422]/30 hover:-translate-y-1"
-                style={{ fontFamily: 'Teko, sans-serif' }}
-              >
-                Quero Patrocinar
-              </button>
+
+              <div className="flex flex-col items-center gap-6">
+                <button
+                  className="group/btn relative px-12 py-5 bg-[#ff4422] text-white font-display font-black uppercase text-2xl italic tracking-widest rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_40px_rgba(255,68,34,0.4)] overflow-hidden"
+                  style={{ fontFamily: 'Teko, sans-serif' }}
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    SEJA UM PATROCINADOR <Flag size={24} />
+                  </span>
+                  <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                </button>
+                <div className="flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest">
+                  <div className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
+                  CAPACIDADE LIMITADA
+                </div>
+              </div>
             </div>
+
+            {/* Decorative Vector Accents */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white/[0.03] to-transparent rounded-full -mr-32 -mt-32" />
           </div>
-          
-          {/* Animated border */}
-          <div 
-            className="absolute inset-0 rounded-xl pointer-events-none"
-            style={{
-              background: 'linear-gradient(90deg, #ff4422, #ffd700, #ff4422)',
-              backgroundSize: '200% 100%',
-              animation: 'shimmer 3s linear infinite',
-              opacity: 0.5,
-              zIndex: -1,
-              filter: 'blur(8px)'
-            }}
-          />
         </div>
       </div>
-
-      <style>{`
-        @keyframes shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-      `}</style>
     </section>
+
   );
 }
 

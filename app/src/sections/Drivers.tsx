@@ -123,67 +123,80 @@ export function Drivers() {
     <section
       ref={sectionRef}
       id="categories"
-      className="py-16 md:py-24 bg-[#303285] relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#080808] relative overflow-hidden"
     >
-      {/* Carbon fiber pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.1) 2px,
-            rgba(0,0,0,0.1) 4px
-          )`
-        }}
-      />
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#303285]/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#ff4422]/10 to-transparent" />
 
-      {/* Animated background elements */}
-      <div className="absolute top-20 left-10 w-40 h-40 border border-white/10 rounded-full animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-60 h-60 border border-white/5 rounded-full" />
+        {/* Animated grid/racing lines */}
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+            backgroundSize: '100px 100px',
+            transform: 'perspective(1000px) rotateX(60deg) translateY(-100px)',
+            transformOrigin: 'top center'
+          }}
+        />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Title */}
-        <h2
-          ref={titleRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-display font-bold uppercase italic text-center mb-10 text-white"
-          style={{ fontFamily: 'Teko, sans-serif' }}
-        >
-          Pilotos da Temporada
-        </h2>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2
+            ref={titleRef}
+            className="text-5xl md:text-8xl font-display font-black uppercase italic text-white flex items-center justify-center leading-none tracking-tighter"
+            style={{ fontFamily: 'Teko, sans-serif' }}
+          >
+            <span className="w-3 h-12 md:h-16 bg-[#303285] mr-4 inline-block transform -skew-x-12 shadow-[0_0_15px_#303285]" />
+            Grid de Pilotos
+          </h2>
+          <p className="text-gray-400 mt-4 text-xl font-medium tracking-widest uppercase italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+            Os Protagonistas da Velocidade
+          </p>
+        </div>
 
-        {/* Category Tabs */}
+        {/* Premium Racing Tabs */}
         <div
           ref={tabsRef}
-          className="flex justify-center space-x-4 mb-12"
+          className="flex justify-center mb-16"
         >
-          <button
-            onClick={() => handleTabChange('pro')}
-            className={`px-8 py-3 font-display uppercase text-xl rounded-lg transition-all duration-300 ${activeTab === 'pro'
-              ? 'bg-[#ff4422] text-white shadow-lg shadow-[#ff4422]/30 scale-110'
-              : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm'
-              }`}
-            style={{ fontFamily: 'Teko, sans-serif' }}
-          >
-            Pro
-          </button>
-          <button
-            onClick={() => handleTabChange('light')}
-            className={`px-8 py-3 font-display uppercase text-xl rounded-lg transition-all duration-300 ${activeTab === 'light'
-              ? 'bg-[#ff4422] text-white shadow-lg shadow-[#ff4422]/30 scale-110'
-              : 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm'
-              }`}
-            style={{ fontFamily: 'Teko, sans-serif' }}
-          >
-            Light
-          </button>
+          <div className="bg-white/5 backdrop-blur-xl p-1.5 rounded-2xl border border-white/10 flex gap-2">
+            <button
+              onClick={() => handleTabChange('pro')}
+              className={`
+                px-10 py-3 font-display uppercase text-2xl font-bold italic rounded-xl transition-all duration-500
+                ${activeTab === 'pro'
+                  ? 'bg-gradient-to-r from-[#ff4422] to-[#ff6644] text-white shadow-[0_10px_30px_rgba(255,68,34,0.4)] scale-105'
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
+                }
+              `}
+              style={{ fontFamily: 'Teko, sans-serif' }}
+            >
+              CATEGORIA PRO
+            </button>
+            <button
+              onClick={() => handleTabChange('light')}
+              className={`
+                px-10 py-3 font-display uppercase text-2xl font-bold italic rounded-xl transition-all duration-500
+                ${activeTab === 'light'
+                  ? 'bg-gradient-to-r from-[#303285] to-[#2E6A9C] text-white shadow-[0_10px_30px_rgba(48,50,133,0.4)] scale-105'
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
+                }
+              `}
+              style={{ fontFamily: 'Teko, sans-serif' }}
+            >
+              CATEGORIA LIGHT
+            </button>
+          </div>
         </div>
 
         {/* Drivers Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8"
         >
           {currentDrivers.map((driver) => (
             <GlitchCard
@@ -193,94 +206,104 @@ export function Drivers() {
               glitchColor1={driver.color}
               glitchColor2="#ffffff"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg group cursor-pointer">
-                {/* Driver Image */}
-                <div className="relative overflow-hidden aspect-[3/4]">
-                  {/* Real Photo */}
+              <div className="relative group cursor-pointer bg-[#101010] rounded-2xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 shadow-2xl">
+                {/* Driver Identity Plate */}
+                <div className="relative aspect-[3/4.5] overflow-hidden">
                   <img
                     src={driver.image}
                     alt={driver.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-115"
                     loading="lazy"
                   />
 
-                  {/* Gradient overlay for better text readability */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                  />
+                  {/* High-end gradient mask */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/20 opacity-80" />
 
-                  {/* Number overlay */}
-                  <div className="absolute bottom-0 inset-x-0 p-3">
+                  {/* Racing Number with Glow */}
+                  <div className="absolute -bottom-4 -left-4">
                     <div
-                      className="text-white font-display text-4xl font-bold leading-none drop-shadow-lg"
+                      className="text-white font-display text-8xl font-black italic leading-none opacity-20 group-hover:opacity-40 transition-opacity duration-500 select-none"
+                      style={{ fontFamily: 'Teko, sans-serif' }}
+                    >
+                      {driver.number}
+                    </div>
+                  </div>
+
+                  {/* Floating Number Accent */}
+                  <div className="absolute top-4 right-4">
+                    <div
+                      className="text-white font-display text-3xl font-bold italic bg-black/40 backdrop-blur-md w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 shadow-xl"
                       style={{
                         fontFamily: 'Teko, sans-serif',
-                        textShadow: `0 0 20px ${driver.color}, 0 0 40px ${driver.color}50`
+                        color: driver.color,
+                        boxShadow: `0 0 20px ${driver.color}40`
                       }}
                     >
                       {driver.number}
                     </div>
                   </div>
 
-                  {/* Hover overlay with color accent */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300"
-                    style={{ background: `linear-gradient(135deg, ${driver.color} 0%, transparent 100%)` }}
-                  />
+                  {/* Interaction Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                {/* Name bar */}
+                {/* Name Label - Slanted style */}
                 <div
-                  className="p-2 transition-all duration-300 group-hover:brightness-110"
-                  style={{ background: driver.color }}
+                  className="relative py-4 px-3 text-center transition-all duration-500 bg-[#1a1a1a]"
                 >
                   <div
-                    className="text-white font-bold uppercase text-xs leading-tight text-center truncate"
-                  >
+                    className="absolute inset-y-0 left-0 w-1.5 shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                    style={{ background: driver.color }}
+                  />
+                  <div className="text-white font-display text-xl leading-none uppercase italic font-bold tracking-tight truncate" style={{ fontFamily: 'Teko, sans-serif' }}>
                     {driver.name}
                   </div>
+                  <div className="text-[9px] text-white/30 font-black tracking-widest uppercase mt-1">SQUADRA CORSE</div>
                 </div>
               </div>
             </GlitchCard>
           ))}
         </div>
 
-        {/* Stats summary */}
-        <div className="mt-12 flex justify-center gap-8 md:gap-16">
-          <div className="text-center">
-            <div
-              className="text-4xl md:text-5xl font-display font-bold text-white"
-              style={{ fontFamily: 'Teko, sans-serif' }}
-            >
-              {currentDrivers.length}
+        {/* Premium Stats Summary */}
+        <div className="mt-24 max-w-4xl mx-auto p-10 bg-white/5 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
+          <div className="grid grid-cols-3 gap-8 md:gap-16">
+            <div className="text-center group">
+              <div
+                className="text-5xl md:text-7xl font-display font-black text-white leading-none group-hover:scale-110 group-hover:text-[#ff4422] transition-all duration-500"
+                style={{ fontFamily: 'Teko, sans-serif' }}
+              >
+                {currentDrivers.length}
+              </div>
+              <div className="text-white/40 text-xs md:text-sm uppercase font-black tracking-[0.2em] mt-2">Pilotos Confirmados</div>
             </div>
-            <div className="text-white/60 text-sm uppercase tracking-wider">Pilotos</div>
-          </div>
-          <div className="text-center">
-            <div
-              className="text-4xl md:text-5xl font-display font-bold text-[#ff4422]"
-              style={{ fontFamily: 'Teko, sans-serif' }}
-            >
-              {activeTab === 'pro' ? '50' : '30'}
+            <div className="text-center group">
+              <div
+                className="text-5xl md:text-7xl font-display font-black text-[#ff4422] leading-none group-hover:scale-110 transition-all duration-500"
+                style={{ fontFamily: 'Teko, sans-serif', textShadow: '0 0 30px rgba(255,68,34,0.3)' }}
+              >
+                {activeTab === 'pro' ? '52' : '34'}
+              </div>
+              <div className="text-white/40 text-xs md:text-sm uppercase font-black tracking-[0.2em] mt-2">Corridas Disputadas</div>
             </div>
-            <div className="text-white/60 text-sm uppercase tracking-wider">Corridas</div>
-          </div>
-          <div className="text-center">
-            <div
-              className="text-4xl md:text-5xl font-display font-bold text-white"
-              style={{ fontFamily: 'Teko, sans-serif' }}
-            >
-              12
+            <div className="text-center group">
+              <div
+                className="text-5xl md:text-7xl font-display font-black text-white leading-none group-hover:scale-110 group-hover:text-[#303285] transition-all duration-500"
+                style={{ fontFamily: 'Teko, sans-serif' }}
+              >
+                12
+              </div>
+              <div className="text-white/40 text-xs md:text-sm uppercase font-black tracking-[0.2em] mt-2">Etapas no Calendário</div>
             </div>
-            <div className="text-white/60 text-sm uppercase tracking-wider">Etapas</div>
           </div>
         </div>
       </div>
 
-      {/* Side decorations */}
-      <div className="absolute left-0 top-1/3 w-1 h-32 bg-[#ff4422]/50" />
-      <div className="absolute right-0 bottom-1/3 w-1 h-24 bg-white/20" />
+      {/* Decorative linear accents */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
     </section>
+
   );
 }
 

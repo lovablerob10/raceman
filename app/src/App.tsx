@@ -55,7 +55,7 @@ function App() {
     <div className="min-h-screen bg-black transition-colors duration-300">
       {/* Cinematic Intro */}
       {!introComplete && (
-        <CinematicIntro 
+        <CinematicIntro
           onComplete={() => setIntroComplete(true)}
           skipOnScroll={true}
         />
@@ -63,83 +63,84 @@ function App() {
 
       {/* Navigation */}
       <Navigation />
-      
+
       {/* Main Content */}
       <main>
         {/* Hero Section - Premium F1 Style */}
         <HeroPremium />
-        
+
         {/* Transition */}
-        <SectionTransition 
-          type="diagonal" 
-          fromColor="#000000" 
-          toColor="#1a1a1a" 
+        <SectionTransition
+          type="diagonal"
+          fromColor="#000000"
+          toColor="#050505"
         />
 
         {/* Real Kart Experience - Video with scroll control */}
         <RealKartExperience />
 
         {/* Transition */}
-        <SectionTransition 
-          type="wipe" 
-          fromColor="#1a1a1a" 
-          toColor="#0D0D0D" 
+        <SectionTransition
+          type="wipe"
+          fromColor="#050505"
+          toColor="#0D0D0D"
         />
-        
+
         {/* Calendar / Stages Section */}
         <Calendar />
 
         {/* Transition */}
-        <SectionTransition 
-          type="fade" 
-          fromColor="#0D0D0D" 
-          toColor="#E10600" 
+        <SectionTransition
+          type="fade"
+          fromColor="#0D0D0D"
+          toColor="#0a0a0a"
         />
-        
+
         {/* News Section */}
         <News />
 
         {/* Transition */}
-        <SectionTransition 
-          type="diagonal" 
-          fromColor="#E10600" 
-          toColor="#1a1a1a" 
+        <SectionTransition
+          type="diagonal"
+          fromColor="#0a0a0a"
+          toColor="#050505"
         />
-        
+
         {/* Standings Section */}
         <Standings />
 
         {/* Transition */}
-        <SectionTransition 
-          type="curtain" 
-          fromColor="#1a1a1a" 
-          toColor="#001F3F" 
+        <SectionTransition
+          type="curtain"
+          fromColor="#050505"
+          toColor="#000214"
         />
-        
+
         {/* Drivers Section */}
         <Drivers />
 
         {/* Transition */}
-        <SectionTransition 
-          type="wipe" 
-          fromColor="#001F3F" 
-          toColor="#0D0D0D" 
+        <SectionTransition
+          type="wipe"
+          fromColor="#000214"
+          toColor="#0D0D0D"
         />
-        
+
         {/* Champions Gallery */}
         <Champions />
 
         {/* Transition */}
-        <SectionTransition 
-          type="fade" 
-          fromColor="#0D0D0D" 
-          toColor="#FFFFFF" 
+        <SectionTransition
+          type="fade"
+          fromColor="#0D0D0D"
+          toColor="#0a0a0a"
         />
-        
+
         {/* Sponsors Section */}
         <Sponsors />
+
       </main>
-      
+
       {/* Footer */}
       <Footer />
     </div>

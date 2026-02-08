@@ -244,159 +244,227 @@ export function Standings() {
     <section
       ref={sectionRef}
       id="standings"
-      className="py-16 md:py-24 bg-gray-50 dark:bg-[#1a1a1a] relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#050505] relative overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-gray-200 dark:from-black/20 to-transparent" />
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-[#2E6A9C]/10 to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-[#ff4422]/10 to-transparent" />
+        {/* Carbon fiber texture overlay */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none carbon-fiber" />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Title */}
-        <h2
-          ref={titleRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-display font-bold uppercase italic text-center mb-16 text-[#2E6A9C] dark:text-white"
-          style={{ fontFamily: 'Teko, sans-serif' }}
-        >
-          Classificação Geral
-        </h2>
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-3 bg-[#2E6A9C]/20 border border-[#2E6A9C]/30 px-4 py-1.5 rounded-full mb-6 backdrop-blur-md">
+            <Trophy size={16} className="text-[#F5B500] animate-bounce" />
+            <span className="text-[#F5B500] text-sm font-bold uppercase tracking-widest" style={{ fontFamily: 'Teko, sans-serif' }}>
+              Campeonato 2026
+            </span>
+          </div>
+          <h2
+            ref={titleRef}
+            className="text-5xl md:text-8xl font-display font-black uppercase italic text-white flex items-center justify-center leading-none tracking-tighter"
+            style={{ fontFamily: 'Teko, sans-serif' }}
+          >
+            Classificação Geral
+          </h2>
+          <div className="h-1.5 w-32 bg-[#ff4422] mx-auto mt-6 shadow-[0_0_15px_#ff4422]" />
+        </div>
 
-        {/* Podium */}
+        {/* Premium Podium */}
         <div
           ref={podiumRef}
-          className="flex flex-col md:flex-row justify-center items-end gap-4 md:gap-8 mb-16 max-w-4xl mx-auto"
+          className="flex flex-col md:flex-row justify-center items-end gap-0 md:gap-4 mb-24 max-w-5xl mx-auto"
         >
           {[2, 1, 3].map((position) => {
             const pilot = podiumData.find(p => p.position === position);
             if (!pilot) return null;
 
+            const isWinner = position === 1;
+
             return (
               <div
                 key={position}
-                className={`podium-item flex flex-col items-center ${position === 1 ? 'order-1 md:order-2 z-10' : position === 2 ? 'order-2 md:order-1' : 'order-3'}`}
+                className={`podium-item flex flex-col items-center w-full md:w-1/3 ${isWinner ? 'order-1 md:order-2 z-20 scale-110 md:-translate-y-4' : position === 2 ? 'order-2 md:order-1' : 'order-3'}`}
               >
-                {/* Avatar with photo */}
-                <div className="relative mb-2">
+                {/* Avatar with glow for winner */}
+                <div className="relative mb-6">
+                  <div className={`
+                    absolute inset-0 rounded-full blur-2xl opacity-50
+                    ${position === 1 ? 'bg-[#F5B500]' : position === 2 ? 'bg-gray-400' : 'bg-[#2E6A9C]'}
+                  `} />
                   <PilotAvatar
                     name={pilot.name}
-                    size={position === 1 ? 'lg' : 'md'}
+                    size={isWinner ? 'lg' : 'md'}
                     position={position}
                     showBorder={true}
                   />
 
-                  {/* Position badge */}
-                  <div
-                    className={`absolute -bottom-1 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full shadow-lg ${position === 1 ? 'bg-[#F5B500] text-[#2D2D2D]' :
-                      position === 2 ? 'bg-gray-300 text-[#2D2D2D]' :
-                        'bg-[#2E6A9C] text-white'
-                      }`}
-                  >
-                    {position}º
-                  </div>
+                  {/* Winner Crown Icon */}
+                  {isWinner && (
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[#F5B500]">
+                      <Trophy size={40} className="drop-shadow-[0_0_10px_#F5B500]" />
+                    </div>
+                  )}
                 </div>
 
-                {/* Info */}
-                <div className="text-center mb-2 mt-2">
-                  <div className={`font-bold text-gray-800 dark:text-gray-200 leading-tight ${position === 1 ? 'text-lg' : ''}`}>
+                {/* Pilot Info - Premium Plate */}
+                <div className={`
+                  w-full text-center px-6 py-4 mb-2 rounded-t-2xl backdrop-blur-xl border-x border-t
+                  ${isWinner
+                    ? 'bg-gradient-to-b from-[#F5B500]/20 to-transparent border-[#F5B500]/40'
+                    : 'bg-white/5 border-white/10'
+                  }
+                `}>
+                  <div className={`font-display font-black uppercase italic text-white leading-tight ${isWinner ? 'text-2xl' : 'text-xl'}`} style={{ fontFamily: 'Teko, sans-serif' }}>
                     {pilot.name}
                   </div>
-                  <div className="text-sm text-gray-500">{pilot.points} pts</div>
+                  <div className={`text-sm font-bold tracking-tighter ${isWinner ? 'text-[#F5B500]' : 'text-gray-400'}`}>
+                    {pilot.points} PONTOS
+                  </div>
                 </div>
 
-                {/* Podium block */}
+                {/* Podium pedestal block */}
                 <div
-                  className={`w-28 md:w-32 bg-gradient-to-b ${getPositionColor(position)} rounded-t-lg shadow-lg flex items-center justify-center relative overflow-hidden ${getPositionHeight(position)}`}
+                  className={`
+                    w-full relative overflow-hidden transition-all duration-500
+                    bg-gradient-to-b ${getPositionColor(position)}
+                    border-x border-b border-white/20
+                    ${getPositionHeight(position)} 
+                    flex flex-col items-center justify-center
+                    shadow-[0_20px_50px_rgba(0,0,0,0.5)]
+                  `}
                 >
-                  {/* Checkered pattern overlay */}
+                  {/* High-tech pattern overlay */}
                   <div
-                    className="absolute inset-0 opacity-10"
+                    className="absolute inset-0 opacity-20 pointer-events-none"
                     style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, #000 25%, transparent 25%),
-                        linear-gradient(-45deg, #000 25%, transparent 25%),
-                        linear-gradient(45deg, transparent 75%, #000 75%),
-                        linear-gradient(-45deg, transparent 75%, #000 75%)
-                      `,
-                      backgroundSize: '10px 10px'
+                      backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px)`,
                     }}
                   />
-                  <span className={`text-4xl md:text-6xl font-display font-bold text-white relative z-10 ${position !== 1 ? 'opacity-50' : ''}`}>
-                    {position}
-                  </span>
+
+                  {/* Position number - Large and integrated */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <span className={`
+                      font-display font-black text-white leading-none tracking-tighter
+                      ${isWinner ? 'text-9xl' : 'text-7xl opacity-40'}
+                    `} style={{ fontFamily: 'Teko, sans-serif' }}>
+                      {position}
+                    </span>
+                    <span className="text-white/60 font-bold uppercase tracking-widest text-[10px] -mt-2">POSITION</span>
+                  </div>
+
+                  {/* Winner shimmer effect */}
+                  {isWinner && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-[200%] -translate-x-full animate-[trophy-shine_3s_linear_infinite] pointer-events-none" />
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Standings Table */}
+        {/* Premium Standings Table */}
         <div
           ref={tableRef}
-          className="max-w-4xl mx-auto bg-white dark:bg-[#262626] rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700"
+          className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] bg-white/5 backdrop-blur-2xl border border-white/10"
         >
-          {/* Header */}
-          <div className="flex bg-[#2E6A9C] text-white font-display text-lg md:text-xl uppercase py-4 px-4 md:px-6">
-            <div className="w-12 md:w-16 text-center">Pos</div>
-            <div className="w-16 md:w-20 text-center hidden sm:block">Cat</div>
-            <div className="flex-1 pl-4">Piloto</div>
-            <div className="w-20 md:w-24 text-right pr-2 md:pr-4">Pontos</div>
+          {/* Table Header - Racing Stripe style */}
+          <div className="flex bg-gradient-to-r from-[#2E6A9C] via-[#303285] to-[#ff4422] text-white font-display text-xl md:text-2xl uppercase italic py-5 px-6 tracking-wider" style={{ fontFamily: 'Teko, sans-serif' }}>
+            <div className="w-20 text-center">POS</div>
+            <div className="w-24 text-center hidden sm:block border-l border-white/20">CAT</div>
+            <div className="flex-1 pl-8 border-l border-white/20">PILOTO</div>
+            <div className="w-32 text-right pr-6 border-l border-white/20">TOTAL PONTOS</div>
           </div>
 
           {/* Rows */}
-          {standingsData.map((item, index) => (
-            <div
-              key={item.name}
-              className={`standings-row flex items-center py-3 md:py-4 px-4 md:px-6 border-b border-gray-100 dark:border-gray-700 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 ${item.highlight ? 'bg-yellow-50 dark:bg-yellow-900/10' : ''
-                }`}
-            >
-              <div className={`w-12 md:w-16 text-center font-bold text-xl ${item.position === 1 ? 'text-[#F5B500]' :
-                item.position === 2 ? 'text-gray-400' :
-                  item.position === 3 ? 'text-[#2E6A9C]' :
-                    'text-gray-500'
-                }`}>
-                {item.position}º
-              </div>
+          <div className="divide-y divide-white/5">
+            {standingsData.map((item, index) => (
+              <div
+                key={item.name}
+                className={`
+                  standings-row relative group flex items-center py-5 px-6 
+                  transition-all duration-500
+                  hover:bg-white/[0.07]
+                  ${item.highlight ? 'bg-[#ff4422]/5' : ''}
+                `}
+              >
+                {/* Position Marker */}
+                <div className={`
+                  w-20 text-center font-display font-black text-3xl italic tracking-tighter leading-none
+                  ${item.position === 1 ? 'text-[#F5B500] drop-shadow-[0_0_8px_#F5B500]' :
+                    item.position === 2 ? 'text-gray-400' :
+                      item.position === 3 ? 'text-[#2E6A9C]' :
+                        'text-white/40'
+                  }
+                `} style={{ fontFamily: 'Teko, sans-serif' }}>
+                  #{item.position.toString().padStart(2, '0')}
+                </div>
 
-              <div className="w-16 md:w-20 text-center hidden sm:block">
-                <span className={`text-xs font-bold px-2 py-1 rounded uppercase ${item.category === 'Pro' ? 'bg-[#2E6A9C] text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
-                  }`}>
-                  {item.category}
-                </span>
-              </div>
+                {/* Category Badge */}
+                <div className="w-24 text-center hidden sm:block">
+                  <span className={`
+                    text-[10px] font-black px-2.5 py-1 rounded skew-x-[-15deg] uppercase tracking-widest
+                    ${item.category === 'Pro' ? 'bg-[#ff4422] text-white' : 'bg-gray-700 text-gray-300'}
+                  `}>
+                    <span className="inline-block skew-x-[15deg]">{item.category}</span>
+                  </span>
+                </div>
 
-              <div className="flex-1 pl-4 flex items-center">
-                {/* Avatar with photo */}
-                <PilotAvatar
-                  name={item.name}
-                  size="sm"
-                  position={item.position}
-                  showBorder={true}
-                />
-                <span className={`font-medium text-gray-700 dark:text-gray-300 text-sm md:text-base ml-3 ${item.highlight ? 'font-bold' : ''}`}>
-                  {item.name}
-                </span>
-                {item.highlight && <Trophy className="ml-2 text-yellow-500" size={16} />}
-              </div>
+                {/* Pilot Identity */}
+                <div className="flex-1 pl-8 flex items-center">
+                  <div className="relative group-hover:scale-110 transition-transform duration-300">
+                    <PilotAvatar
+                      name={item.name}
+                      size="sm"
+                      position={item.position}
+                      showBorder={index < 3}
+                    />
+                    {item.highlight && <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#ff4422] rounded-full animate-ping" />}
+                  </div>
+                  <div className="ml-4">
+                    <span className={`
+                      block font-display text-xl uppercase italic tracking-wide transition-colors
+                      ${item.highlight ? 'text-white font-black' : 'text-white/80 group-hover:text-white'}
+                    `} style={{ fontFamily: 'Teko, sans-serif' }}>
+                      {item.name}
+                    </span>
+                    <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest leading-none">Scuderia RKT</span>
+                  </div>
+                </div>
 
-              <div className={`w-20 md:w-24 text-right pr-2 md:pr-4 font-display text-xl md:text-2xl ${item.highlight ? 'text-[#F5B500]' : 'text-[#2E6A9C] dark:text-blue-300'
-                }`}>
-                {animatedPoints[index]} PTS
-              </div>
-            </div>
-          ))}
+                {/* Points Counter */}
+                <div className={`
+                  w-32 text-right pr-6 font-display text-3xl italic font-black tracking-tighter transition-all duration-300
+                  ${item.highlight ? 'text-[#ff4422] scale-110' : 'text-white/60 group-hover:text-white'}
+                `} style={{ fontFamily: 'Teko, sans-serif' }}>
+                  {animatedPoints[index]} <span className="text-xs ml-1 opacity-50 not-italic uppercase">Pts</span>
+                </div>
 
-          {/* Footer */}
-          <div className="py-4 text-center bg-gray-50 dark:bg-[#1a1a1a] border-t border-gray-200 dark:border-gray-700">
-            <button className="text-[#2E6A9C] font-bold uppercase text-sm hover:underline flex items-center justify-center gap-2 mx-auto transition-all hover:gap-4">
-              Ver Tabela Completa
-              <TrendingUp size={16} />
+                {/* Row Hover Line */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ff4422] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 shadow-[0_0_10px_#ff4422]" />
+              </div>
+            ))}
+          </div>
+
+          {/* Table Footer - High Tech Link */}
+          <div className="py-6 text-center bg-black/40 backdrop-blur-md border-t border-white/10 group/footer overflow-hidden relative">
+            <button className="relative z-10 text-white font-display font-black uppercase text-xl leading-none italic tracking-widest flex items-center justify-center gap-3 mx-auto transition-all duration-500 hover:gap-6" style={{ fontFamily: 'Teko, sans-serif' }}>
+              Ver Relatório de Temporada Completo
+              <TrendingUp size={24} className="text-[#ff4422]" />
             </button>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff4422]/5 to-transparent -translate-x-full group-hover/footer:translate-x-full transition-transform duration-1000" />
           </div>
         </div>
       </div>
 
-      {/* Background decorations */}
-      <div className="absolute top-1/4 left-0 w-64 h-64 bg-[#ff4422]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-48 h-48 bg-[#303285]/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative side lines */}
+      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#ff4422]/20 to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#2E6A9C]/20 to-transparent" />
     </section>
+
   );
 }
 

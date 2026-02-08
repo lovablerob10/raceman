@@ -130,115 +130,115 @@ export function RealKartExperience() {
 
         {/* 3. Title/Intro Overlay (Fades out) */}
         <div
-          className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-500 ${showContent ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          className={`absolute inset-0 z-10 flex items-center justify-center transition-all duration-700 ${showContent ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%)'
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)'
           }}
         >
           <div
             ref={titleRef}
             className="text-center px-4"
           >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-red-600 px-4 py-2 rounded mb-6 shadow-lg">
-              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-              <span className="text-white font-mono text-sm uppercase tracking-wider">
-                Experiência Imersiva
+            {/* Premium Badge */}
+            <div className="inline-flex items-center gap-3 bg-[#ff4422]/20 border border-[#ff4422]/40 px-6 py-2 rounded-full mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(255,68,34,0.3)]">
+              <span className="w-2.5 h-2.5 bg-[#ff4422] rounded-full animate-ping" />
+              <span className="text-white font-display text-lg uppercase font-black tracking-[0.3em]" style={{ fontFamily: 'Teko, sans-serif' }}>
+                Experiência Imersiva 360°
               </span>
             </div>
 
-            {/* Title */}
+            {/* Cinematic Title */}
             <h2
-              className="text-5xl md:text-7xl lg:text-8xl font-bold italic text-white mb-4 drop-shadow-lg"
+              className="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase italic text-white mb-6 leading-none tracking-tighter"
               style={{
                 fontFamily: 'Teko, sans-serif',
-                textShadow: '0 4px 20px rgba(0,0,0,0.8)'
+                textShadow: '0 10px 40px rgba(0,0,0,0.9)'
               }}
             >
-              SENSAÇÃO DE
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">
-                VELOCIDADE
+              <span className="block opacity-80">SENSAÇÃO DE</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#ff4422] via-[#ff6644] to-[#F5B500] drop-shadow-[0_0_30px_rgba(255,68,34,0.5)]">
+                PURA ADRENALINA
               </span>
             </h2>
 
-            {/* Subtitle */}
+            {/* Cinematic Subtitle */}
             <p
-              className="text-lg md:text-xl text-white/90 font-technical max-w-2xl mx-auto mb-8"
-              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+              className="text-xl md:text-2xl text-white/70 font-display font-medium max-w-3xl mx-auto mb-12 uppercase italic tracking-wide"
+              style={{ fontFamily: 'Teko, sans-serif' }}
             >
-              Role para baixo e controle a experiência.
-              Sinta a adrenalina de um kart de verdade em alta velocidade.
+              Acelere a fundo. Controle cada curva. Sinta o asfalto.
+              O controle está <span className="text-white font-black underline decoration-[#ff4422]">no seu scroll</span>.
             </p>
 
-            {/* Scroll indicator */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2 bg-black/30">
-                <div className="w-1.5 h-3 bg-white rounded-full animate-bounce" />
+            {/* Premium Scroll indicator */}
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-1 h-32 bg-gradient-to-b from-transparent via-[#ff4422] to-transparent animate-[scroll-line_2s_infinite]" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#ff4422] blur-xl opacity-20 animate-pulse" />
+                <span className="relative z-10 text-white font-display text-2xl font-black uppercase italic tracking-[0.5em] border border-white/20 px-8 py-2 rounded-lg backdrop-blur-xl" style={{ fontFamily: 'Teko, sans-serif' }}>
+                  SCROLL PARA ACELERAR
+                </span>
               </div>
-              <span className="text-white/80 text-sm font-mono bg-black/50 px-3 py-1 rounded">
-                SCROLL PARA ACELERAR
-              </span>
             </div>
           </div>
         </div>
 
-        {/* 4. HUD Elements (Visible during scroll) */}
+        {/* 4. PREMIUM HUD Elements (Visible during scroll) */}
 
-        {/* Speed Indicator */}
-        <div className="absolute bottom-8 left-8 z-20">
+        {/* Speed Indicator - Glassmorphism style */}
+        <div className="absolute bottom-12 left-12 z-20">
           <div
-            className="p-4 rounded-lg"
+            className="p-6 rounded-[2rem] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             style={{
-              background: 'rgba(0, 0, 0, 0.85)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
             }}
           >
-            <div className="text-[10px] text-white/60 uppercase tracking-wider mb-1">Velocidade</div>
-            <div className="flex items-baseline gap-1">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-1.5 h-4 bg-[#ff4422]" />
+              <span className="text-[10px] text-white/50 font-black uppercase tracking-[0.3em]">Velocidade Atual</span>
+            </div>
+            <div className="flex items-baseline gap-2">
               <span
-                className="text-4xl md:text-5xl font-bold text-white font-mono tabular-nums"
+                className="text-6xl md:text-8xl font-display font-black italic tabular-nums leading-none tracking-tighter"
                 style={{
-                  color: telemetry.speed > 120 ? '#ff4444' : telemetry.speed > 60 ? '#ffaa00' : '#44ff44',
-                  textShadow: telemetry.speed > 100 ? '0 0 20px currentColor' : 'none'
+                  fontFamily: 'Teko, sans-serif',
+                  color: telemetry.speed > 140 ? '#ff4422' : telemetry.speed > 80 ? '#F5B500' : '#ffffff',
+                  textShadow: telemetry.speed > 120 ? '0 0 30px rgba(255, 68, 34, 0.5)' : 'none'
                 }}
               >
                 {telemetry.speed}
               </span>
-              <span className="text-white/50 text-sm">KM/H</span>
+              <span className="text-[#ff4422] text-xl font-display font-black italic" style={{ fontFamily: 'Teko, sans-serif' }}>KM/H</span>
             </div>
-            <div className="mt-2 w-32 md:w-40 h-2 bg-white/20 rounded-full overflow-hidden">
+            <div className="mt-4 w-40 md:w-56 h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-100"
                 style={{
                   width: `${(telemetry.speed / 180) * 100}%`,
-                  background: `linear-gradient(90deg, #44ff44 0%, #ffaa00 50%, #ff4444 100%)`
+                  background: `linear-gradient(90deg, #303285 0%, #ff4422 100%)`,
+                  boxShadow: '0 0 10px rgba(255, 68, 34, 0.5)'
                 }}
               />
             </div>
           </div>
         </div>
 
-        {/* Gear Indicator */}
-        <div className="absolute bottom-8 right-8 z-20">
+        {/* Gear Indicator - Floating Bold */}
+        <div className="absolute bottom-12 right-12 z-20">
           <div
-            className="p-4 rounded-lg text-center"
+            className="p-8 rounded-[2rem] text-center border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             style={{
-              background: 'rgba(0, 0, 0, 0.85)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
             }}
           >
-            <div className="text-[10px] text-white/60 uppercase tracking-wider mb-1">Marcha</div>
+            <div className="text-[10px] text-white/50 font-black uppercase tracking-[0.3em] mb-2">MARCHA</div>
             <div
-              className="text-5xl md:text-6xl font-bold"
+              className="text-7xl md:text-9xl font-display font-black leading-none italic"
               style={{
                 fontFamily: 'Teko, sans-serif',
-                color: telemetry.gear === '6' ? '#ff4444' : '#ffffff',
-                textShadow: telemetry.gear === '6' ? '0 0 20px #ff4444' : 'none'
+                color: telemetry.gear === '6' ? '#ff4422' : '#ffffff',
+                textShadow: telemetry.gear === '6' ? '0 0 30px #ff4422' : '0 0 20px rgba(255,255,255,0.2)'
               }}
             >
               {telemetry.gear}
@@ -246,67 +246,68 @@ export function RealKartExperience() {
           </div>
         </div>
 
-        {/* Side Info Panel */}
-        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 hidden lg:block">
+        {/* Side Info Panel - Tech Grid style */}
+        <div className="absolute top-1/2 right-12 -translate-y-1/2 z-20 hidden lg:block">
           <div
-            className="space-y-4 p-4 rounded-lg"
+            className="space-y-6 p-8 rounded-[2.5rem] border border-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             style={{
-              background: 'rgba(0, 0, 0, 0.7)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.15)'
+              background: 'rgba(5, 5, 5, 0.4)',
             }}
           >
-            <div className="text-right">
-              <div className="text-[10px] text-white/50 uppercase tracking-wider">RPM</div>
+            <div>
+              <div className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em] mb-1">MOTOR RPM</div>
               <div
-                className="text-2xl font-mono tabular-nums"
+                className="text-4xl font-display font-black italic tracking-tight italic"
                 style={{
-                  color: telemetry.rpm > 12000 ? '#ff4444' : '#ffffff'
+                  fontFamily: 'Teko, sans-serif',
+                  color: telemetry.rpm > 13000 ? '#ff4422' : '#ffffff'
                 }}
               >
                 {telemetry.rpm.toLocaleString()}
               </div>
             </div>
 
-            <div className="text-right">
-              <div className="text-[10px] text-white/50 uppercase tracking-wider">Turbo</div>
-              <div className="w-24 h-2 bg-white/20 rounded-full overflow-hidden ml-auto">
+            <div>
+              <div className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em] mb-2">OVERBOOST TURBO</div>
+              <div className="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
                 <div
-                  className="h-full bg-blue-500 rounded-full transition-all duration-100"
-                  style={{ width: `${telemetry.turbo}%` }}
+                  className="h-full bg-gradient-to-r from-[#303285] to-cyan-400 rounded-full transition-all duration-100"
+                  style={{
+                    width: `${telemetry.turbo}%`,
+                    boxShadow: '0 0 15px rgba(0, 191, 255, 0.4)'
+                  }}
                 />
               </div>
-              <div className="text-xs text-blue-400 mt-1">{telemetry.turbo}%</div>
+              <div className="text-right text-xs text-cyan-400 mt-1 font-mono font-bold">{telemetry.turbo}%</div>
             </div>
 
-            <div className="text-right">
-              <div className="text-[10px] text-white/50 uppercase tracking-wider">Temperatura</div>
-              <div className="text-xl font-mono text-orange-400">
-                {Math.round(85 + telemetry.progress * 40)}°C
+            <div className="flex justify-between items-end gap-6 pt-4 border-t border-white/5">
+              <div>
+                <div className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em]">TRACK TEMP</div>
+                <div className="text-2xl font-display font-bold text-[#F5B500] italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+                  {Math.round(85 + telemetry.progress * 40)}°C
+                </div>
               </div>
-            </div>
-
-            <div className="text-right pt-2 border-t border-white/10">
-              <div className="text-[10px] text-white/50 uppercase tracking-wider">Progresso</div>
-              <div className="text-lg font-mono text-white">
-                {Math.round(telemetry.progress * 100)}%
+              <div className="text-right">
+                <div className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em]">LAP PROGRESS</div>
+                <div className="text-2xl font-display font-bold text-white italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+                  {Math.round(telemetry.progress * 100)}%
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Progress bar at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <div
-            className="h-1 bg-white/20"
-            style={{ width: '100%' }}
-          >
+        {/* Dynamic Progress line - Cyber style */}
+        <div className="absolute bottom-0 left-0 right-0 z-30">
+          <div className="h-2 bg-white/5 overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 transition-all duration-100"
+              className="h-full bg-gradient-to-r from-[#303285] via-[#ff4422] to-[#F5B500] brightness-150 shadow-[0_0_20px_#ff4422]"
               style={{ width: `${telemetry.progress * 100}%` }}
             />
           </div>
         </div>
+
 
       </div>
     </section>

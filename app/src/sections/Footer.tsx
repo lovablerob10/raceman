@@ -68,93 +68,39 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#2D2D2D] text-white py-12 md:py-16 relative overflow-hidden"
+      id="footer"
+      className="bg-[#050505] text-white py-20 md:py-32 relative overflow-hidden border-t-4 border-[#ff4422]"
     >
-      {/* Top border decoration */}
-      <div className="absolute top-0 left-0 right-0 h-2 bg-[#2E6A9C]" />
+      {/* Background Texture - Carbon Fiber */}
+      <div className="absolute inset-0 opacity-[0.03] carbon-fiber pointer-events-none" />
 
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            #000 10px,
-            #000 20px
-          )`
-        }}
-      />
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#303285]/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#ff4422]/10 rounded-full blur-[120px]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div
           ref={contentRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20"
         >
           {/* Brand Column */}
           <div className="footer-column lg:col-span-2">
-            <div
-              className="font-display font-bold text-4xl md:text-5xl italic tracking-wider mb-4"
-              style={{ fontFamily: 'Teko, sans-serif' }}
-            >
-              RKT RACEMAN KART
-            </div>
-            <p className="text-white/80 max-w-sm mb-6 leading-relaxed">
-              O campeonato de kart mais emocionante do interior paulista.
-              Paixão, velocidade e amizade nas pistas desde 2006.
-            </p>
-
-            {/* Contact info */}
-            <div className="space-y-3">
-              <a
-                href="mailto:contato@racemankart.com.br"
-                className="flex items-center gap-3 text-white/70 hover:text-[#F5B500] transition-colors"
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-[#303285] to-[#ff4422]" />
+              <div
+                className="font-display font-black text-6xl md:text-7xl italic tracking-tighter leading-none"
+                style={{ fontFamily: 'Teko, sans-serif' }}
               >
-                <Mail size={18} />
-                contato@racemankart.com.br
-              </a>
-              <a
-                href="tel:+5 Brasil"
-                className="flex items-center gap-3 text-white/70 hover:text-[#F5B500] transition-colors"
-              >
-                <Phone size={18} />
-                (11) 97415-4676
-              </a>
-              <div className="flex items-center gap-3 text-white/70">
-                <MapPin size={18} />
-                Paulínia, SP - Brasil
+                RKT <span className="text-[#ff4422]">RACEMAN</span> KART
               </div>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div className="footer-column">
-            <h4 className="font-bold uppercase mb-4 text-white/90 text-lg">
-              Links Rápidos
-            </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-white/70 hover:text-white hover:underline transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-white transition-all" />
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <p className="text-white/60 text-lg md:text-xl max-w-sm mb-10 leading-relaxed font-medium uppercase italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+              O campeonato de kart amador mais <span className="text-white">agressivo e emocionante</span> do interior paulista. Desde 2006 forjando lendas.
+            </p>
 
-          {/* Social & Contact */}
-          <div className="footer-column">
-            <h4 className="font-bold uppercase mb-4 text-white/90 text-lg">
-              Siga-nos
-            </h4>
-            <div className="flex space-x-3 mb-6">
+            {/* Premium Social Icons */}
+            <div className="flex space-x-5">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -162,47 +108,114 @@ export function Footer() {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="bg-white/20 hover:bg-white/40 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    className="group relative bg-white/5 p-4 rounded-2xl border border-white/10 transition-all duration-500 hover:bg-white/10 hover:-translate-y-2 hover:border-[#ff4422]/50 overflow-hidden"
                   >
-                    <Icon size={20} />
+                    <Icon size={24} className="relative z-10 transition-transform duration-500 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#ff4422]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 );
               })}
             </div>
+          </div>
 
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-white/80 text-sm hover:text-white hover:underline transition-colors"
-            >
-              Entre em contato
-              <ArrowUp size={14} className="rotate-45" />
-            </a>
+          {/* Quick Links Column */}
+          <div className="footer-column">
+            <h4 className="font-display font-black uppercase text-2xl mb-8 text-white/50 tracking-widest italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+              Navegação
+            </h4>
+            <ul className="space-y-4">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className="text-white/60 text-xl font-display font-medium uppercase italic hover:text-[#ff4422] transition-all duration-300 flex items-center gap-4 group"
+                    style={{ fontFamily: 'Teko, sans-serif' }}
+                  >
+                    <div className="w-0 h-0.5 bg-[#ff4422] transition-all duration-300 group-hover:w-8" />
+                    <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Info & Contact */}
+          <div className="footer-column">
+            <h4 className="font-display font-black uppercase text-2xl mb-8 text-white/50 tracking-widest italic" style={{ fontFamily: 'Teko, sans-serif' }}>
+              QG Central
+            </h4>
+            <div className="space-y-6">
+              <a
+                href="mailto:contato@racemankart.com.br"
+                className="group flex items-start gap-4"
+              >
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/50 transition-all duration-300 group-hover:bg-[#ff4422]/10 group-hover:text-[#ff4422] group-hover:border-[#ff4422]/30">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">E-mail</div>
+                  <div className="text-white/80 font-bold">contato@racemankart.com.br</div>
+                </div>
+              </a>
+
+              <a
+                href="tel:+5519974154676"
+                className="group flex items-start gap-4"
+              >
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/50 transition-all duration-300 group-hover:bg-[#ff4422]/10 group-hover:text-[#ff4422] group-hover:border-[#ff4422]/30">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">WhatsApp</div>
+                  <div className="text-white/80 font-bold">(19) 97415-4676</div>
+                </div>
+              </a>
+
+              <div className="group flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/50">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">Localização</div>
+                  <div className="text-white/80 font-bold">Paulínia, SP - Brasil</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-white/60 text-center md:text-left">
-            © 2026 RKT Raceman Kart. Todos os direitos reservados.
-          </p>
+        {/* Bottom bar - Tech Strip */}
+        <div className="mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-xs font-bold text-white/30 uppercase tracking-[0.3em]">
+              © 2026 RKT RACEMAN KART • <span className="text-[#ff4422]">ELITE RACING TEAM</span>
+            </p>
+            <div className="flex items-center gap-4 text-xs font-bold text-white/20 uppercase tracking-[0.2em]">
+              <a href="#" className="hover:text-[#ff4422] transition-colors">Termos</a>
+              <div className="w-1 h-1 bg-white/20 rounded-full" />
+              <a href="#" className="hover:text-[#ff4422] transition-colors">Privacidade</a>
+            </div>
+          </div>
 
-          {/* Back to top button */}
+          {/* Premium Scroll Top Button */}
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-white/60 hover:text-[#F5B500] transition-colors group"
+            className="group relative flex items-center gap-4 bg-white/5 border border-white/10 pl-8 pr-4 py-4 rounded-full transition-all duration-500 hover:bg-white/10 hover:border-[#ff4422]/50"
           >
-            <span className="text-sm">Voltar ao topo</span>
-            <div className="bg-white/10 p-2 rounded-full group-hover:bg-[#F5B500] group-hover:text-black transition-colors">
-              <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-white/50 group-hover:text-white transition-colors">VOLTAR AO TOPO</span>
+            <div className="bg-[#ff4422] p-3 rounded-full text-white shadow-[0_0_20px_rgba(255,68,34,0.4)] transition-transform duration-500 group-hover:-translate-y-2">
+              <ArrowUp size={20} />
             </div>
           </button>
         </div>
       </div>
 
-      {/* Side decorations */}
-      <div className="absolute left-0 top-1/3 w-1 h-20 bg-white/20" />
-      <div className="absolute right-0 bottom-1/3 w-1 h-16 bg-white/10" />
+      {/* Decorative Striped Siderails */}
+      <div className="absolute left-0 bottom-1/4 w-2 h-48 bg-gradient-to-b from-[#303285] via-[#ff4422] to-transparent opacity-30" />
+      <div className="absolute right-0 top-1/4 w-2 h-48 bg-gradient-to-t from-[#ff4422] via-[#F5B500] to-transparent opacity-30" />
     </footer>
+
   );
 }
 
