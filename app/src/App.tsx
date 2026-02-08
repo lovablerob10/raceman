@@ -10,6 +10,7 @@ import { Calendar } from './sections/Calendar';
 import { News } from './sections/News';
 import { Standings } from './sections/Standings';
 import { Drivers } from './sections/Drivers';
+import { Uniforms } from './sections/Uniforms';
 import { Champions } from './sections/Champions';
 import { Sponsors } from './sections/Sponsors';
 import { Footer } from './sections/Footer';
@@ -123,6 +124,16 @@ function App() {
         <SectionTransition
           type="wipe"
           fromColor="#000214"
+          toColor="#0a0a0f"
+        />
+
+        {/* Uniforms Section */}
+        <Uniforms />
+
+        {/* Transition */}
+        <SectionTransition
+          type="fade"
+          fromColor="#0a0a0f"
           toColor="#0D0D0D"
         />
 

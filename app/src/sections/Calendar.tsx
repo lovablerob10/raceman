@@ -13,9 +13,54 @@ interface Stage {
   name: string;
   location: string;
   active: boolean;
+  trainingDate?: string;
+  raceDate?: string;
+  period?: string;
+  dayOfWeek?: string;
+  time?: string;
+  tire?: string;
 }
 
 const MONTHS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+// Complete 2026 Racing Season Schedule
+const SEASON_2026: Stage[] = [
+  { day: '28', month: 'Fev', name: 'Etapa 1', location: 'KNO', active: false, trainingDate: '21/02/26', raceDate: '28/02/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 01' },
+  { day: '28', month: 'Mar', name: 'Etapa 2', location: 'KNO', active: false, trainingDate: '21/03/26', raceDate: '28/03/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 01' },
+  { day: '25', month: 'Abr', name: 'Etapa 3', location: 'KNO', active: false, trainingDate: '18/04/26', raceDate: '25/04/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 02' },
+  { day: '30', month: 'Mai', name: 'Etapa 4', location: 'KNO', active: false, trainingDate: '23/05/26', raceDate: '30/05/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 02' },
+  { day: '26', month: 'Jun', name: 'Etapa 5', location: 'Paulínia', active: false, trainingDate: '24/06/26', raceDate: '26/06/26', period: 'Noturno', dayOfWeek: 'Quinta', time: '19:00 às 22:00', tire: 'PNEU 02' },
+  { day: '26', month: 'Jul', name: 'Etapa 6', location: 'KNO', active: false, trainingDate: '22/07/26', raceDate: '26/07/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 03' },
+  { day: '26', month: 'Ago', name: 'Etapa 7', location: 'KNO', active: false, trainingDate: '19/08/26', raceDate: '26/08/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 03' },
+  { day: '30', month: 'Set', name: 'Etapa 8', location: 'KNO', active: false, trainingDate: '23/09/26', raceDate: '30/09/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 03' },
+  { day: '24', month: 'Out', name: 'Etapa 9', location: 'Paulínia', active: false, trainingDate: '21/10/26', raceDate: '24/10/26', period: 'Noturno', dayOfWeek: 'Quinta', time: '19:00 às 22:00', tire: 'PNEU 04' },
+  { day: '12', month: 'Nov', name: 'Etapa 10', location: 'KNO', active: false, trainingDate: '11/11/26', raceDate: '12/11/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 04' },
+  { day: '12', month: 'Dez', name: 'Etapa 11', location: 'KNO', active: false, trainingDate: '05/12/26', raceDate: '12/12/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 04' },
+];
+
+// Function to determine which stage is active based on current date
+function getStagesWithActiveFlag(stages: Stage[]): Stage[] {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+
+  return stages.map((stage, index) => {
+    // Parse race date (format: DD/MM/YY)
+    const [day, month] = stage.raceDate?.split('/').map(Number) || [0, 0];
+    const raceDate = new Date(currentYear, month - 1, day);
+
+    // Find first upcoming race
+    const isUpcoming = raceDate >= today;
+    const previousStagesCompleted = stages.slice(0, index).every(s => {
+      const [d, m] = s.raceDate?.split('/').map(Number) || [0, 0];
+      return new Date(currentYear, m - 1, d) < today;
+    });
+
+    return {
+      ...stage,
+      active: isUpcoming && previousStagesCompleted
+    };
+  });
+}
 
 export function Calendar() {
   const [stages, setStages] = useState<Stage[]>([]);
@@ -24,28 +69,35 @@ export function Calendar() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch stages from Supabase
+  // Fetch stages from Supabase or use fallback
   useEffect(() => {
     const fetchStages = async () => {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('stages')
-        .select('*')
-        .order('stage_number');
+      try {
+        const { data, error } = await supabase
+          .from('stages')
+          .select('*')
+          .order('stage_number');
 
-      if (error) {
-        console.error('Error fetching stages:', error);
-      } else if (data) {
-        setStages(data.map((s: DBStage) => {
-          const date = new Date(s.date);
-          return {
-            day: date.getDate().toString().padStart(2, '0'),
-            month: MONTHS[date.getMonth()],
-            name: s.name,
-            location: s.location,
-            active: s.is_active
-          };
-        }));
+        if (error || !data || data.length === 0) {
+          // Use fallback 2026 season data
+          console.log('Using fallback 2026 season data');
+          setStages(getStagesWithActiveFlag(SEASON_2026));
+        } else {
+          setStages(data.map((s: DBStage) => {
+            const date = new Date(s.date);
+            return {
+              day: date.getDate().toString().padStart(2, '0'),
+              month: MONTHS[date.getMonth()],
+              name: s.name,
+              location: s.location,
+              active: s.is_active
+            };
+          }));
+        }
+      } catch (err) {
+        console.error('Error fetching stages:', err);
+        setStages(getStagesWithActiveFlag(SEASON_2026));
       }
       setLoading(false);
     };
@@ -284,8 +336,8 @@ export function Calendar() {
             <button
               key={index}
               className={`h-2 rounded-full transition-all duration-500 
-                ${stage.active 
-                  ? 'bg-[#ff4422] w-12 shadow-[0_0_10px_#ff4422]' 
+                ${stage.active
+                  ? 'bg-[#ff4422] w-12 shadow-[0_0_10px_#ff4422]'
                   : 'bg-gray-300 dark:bg-gray-700 w-3 hover:bg-[#ff4422]/30'
                 }`}
               onClick={() => {
