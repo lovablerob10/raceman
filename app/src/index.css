@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import './styles/premium.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Premium F1 Styles */
-@import './styles/premium.css';
 
 @theme inline {
   --color-background: var(--background);
@@ -140,10 +141,8 @@
 }
 
 /* Racing Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 /* Material Icons */
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 /* ==================== ANIMATIONS ==================== */
 
