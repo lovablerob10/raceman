@@ -1,3 +1,4 @@
+// Build trigger: 2026-02-08 22:58
 import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { ImageUpload } from '../components/ImageUpload';
