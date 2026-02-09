@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { X, Info, Flag, CornerUpRight, Activity, FileText } from 'lucide-react';
-import { supabase, type Stage } from '../lib/supabase';
+import { X, Info, Flag, CornerUpRight, Activity } from 'lucide-react';
+import { type Stage } from '../lib/supabase';
 
 interface TrackMapProps {
     stage: Stage;

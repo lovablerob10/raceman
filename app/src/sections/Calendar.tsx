@@ -26,7 +26,7 @@ interface LocalStage extends Partial<DBStage> {
 const MONTHS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
 // Complete 2026 Racing Season Schedule
-const SEASON_2026: Stage[] = [
+const SEASON_2026: LocalStage[] = [
   { day: '28', month: 'Fev', name: 'Etapa 1', location: 'KNO', active: false, trainingDate: '21/02/26', raceDate: '28/02/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 01', trackId: 'KNO_A' },
   { day: '28', month: 'Mar', name: 'Etapa 2', location: 'KNO', active: false, trainingDate: '21/03/26', raceDate: '28/03/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 01', trackId: 'KNO_B' },
   { day: '25', month: 'Abr', name: 'Etapa 3', location: 'KNO', active: false, trainingDate: '18/04/26', raceDate: '25/04/26', period: 'Diurna', dayOfWeek: 'Sábado', time: '08:00 às 12:00', tire: 'PNEU 02', trackId: 'KNO_A' },
@@ -41,7 +41,7 @@ const SEASON_2026: Stage[] = [
 ];
 
 // Function to determine which stage is active based on current date
-function getStagesWithActiveFlag(stages: Stage[]): Stage[] {
+function getStagesWithActiveFlag(stages: LocalStage[]): LocalStage[] {
   const today = new Date();
   const currentYear = today.getFullYear();
 

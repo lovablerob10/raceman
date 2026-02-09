@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Search, Loader2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { ImageUpload } from '../components/ImageUpload';
 import { supabase, type Pilot as DBPilot } from '../../lib/supabase';
 
@@ -13,7 +13,6 @@ interface Pilot {
 
 export function Pilots() {
     const [pilots, setPilots] = useState<Pilot[]>([]);
-    const [loading, setLoading] = useState(true);
 
     // Fetch pilots from Supabase
     useEffect(() => {
@@ -21,7 +20,6 @@ export function Pilots() {
     }, []);
 
     const fetchPilots = async () => {
-        setLoading(true);
         const { data, error } = await supabase
             .from('pilots')
             .select('*')
@@ -38,7 +36,6 @@ export function Pilots() {
                 team: p.team || undefined
             })));
         }
-        setLoading(false);
     };
     const [search, setSearch] = useState('');
     const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'PRO' | 'LIGHT'>('ALL');

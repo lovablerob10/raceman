@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, MapPin, Calendar as CalendarIcon, Check, X, Flag, CornerUpRight, Activity, FileText, Hash, Info } from 'lucide-react';
 import { supabase, type Stage } from '../../lib/supabase';
 
-const statusLabels = {
-    upcoming: 'Próxima',
-    completed: 'Concluída',
-    cancelled: 'Cancelada',
-};
+
 
 export function Stages() {
     const [stages, setStages] = useState<Stage[]>([]);
