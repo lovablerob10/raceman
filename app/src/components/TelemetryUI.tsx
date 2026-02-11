@@ -100,7 +100,7 @@ export function TelemetryUI({
 
         {/* Speed & Gear */}
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="text-center">
+          <div className={gear > 0 ? "text-center" : "text-center col-span-2"}>
             <span className="text-xs text-white/50 uppercase tracking-wider block mb-1">SPEED</span>
             <div className="flex items-baseline justify-center">
               <span className="text-4xl font-bold text-white tabular-nums">
@@ -109,18 +109,20 @@ export function TelemetryUI({
               <span className="text-sm text-white/50 ml-1">KM/H</span>
             </div>
           </div>
-          <div className="text-center">
-            <span className="text-xs text-white/50 uppercase tracking-wider block mb-1">GEAR</span>
-            <span
-              className="text-5xl font-bold italic"
-              style={{
-                color: gear >= 5 ? '#F5B500' : '#2E6A9C',
-                textShadow: gear >= 5 ? '0 0 20px rgba(245, 181, 0, 0.4)' : 'none'
-              }}
-            >
-              {gear}
-            </span>
-          </div>
+          {gear > 0 && (
+            <div className="text-center">
+              <span className="text-xs text-white/50 uppercase tracking-wider block mb-1">GEAR</span>
+              <span
+                className="text-5xl font-bold italic"
+                style={{
+                  color: gear >= 5 ? '#F5B500' : '#2E6A9C',
+                  textShadow: gear >= 5 ? '0 0 20px rgba(245, 181, 0, 0.4)' : 'none'
+                }}
+              >
+                {gear}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Lap Info */}
@@ -146,8 +148,8 @@ export function TelemetryUI({
       {/* Data Stream */}
       <div className="mt-2 bg-black/50 backdrop-blur-sm rounded px-3 py-1 overflow-hidden">
         <div className="data-stream text-[10px] text-white/30 whitespace-nowrap">
-          <span className="inline-block animate-data-stream">
-            TIRE: 85°C | BRAKE: 320°C | ENGINE: 95°C | FUEL: 12.5L | ERS: 65% | DRS: ENABLED | TIRE: 85°C | BRAKE: 320°C | ENGINE: 95°C | FUEL: 12.5L | ERS: 65% | DRS: ENABLED
+          <span className="inline-block animate-data-stream uppercase tracking-widest">
+            VELOCIDADE MÁXIMA: 130 KM/H | MOTOR: 13HP | PNEU: SLICK | PISTA: SECA | TEMPERATURA: 28°C | PRESSÃO: 18 PSI | VELOCIDADE MÁXIMA: 130 KM/H | MOTOR: 13HP | PNEU: SLICK | PISTA: SECA | TEMPERATURA: 28°C | PRESSÃO: 18 PSI
           </span>
         </div>
       </div>

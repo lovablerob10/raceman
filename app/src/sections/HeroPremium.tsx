@@ -242,19 +242,15 @@ export function HeroPremium() {
             {/* Stats Row */}
             <div className="flex gap-8 pt-6">
               <div>
-                <div className="text-4xl font-display font-bold text-white">21</div>
+                <div className="text-4xl font-display font-bold text-white">12</div>
                 <div className="text-sm text-white/50 uppercase tracking-wider">Edições</div>
               </div>
               <div className="w-px bg-white/20" />
               <div>
-                <div className="text-4xl font-display font-bold text-[#F5B500]">200+</div>
-                <div className="text-sm text-white/50 uppercase tracking-wider">Pilotos</div>
+                <div className="text-4xl font-display font-bold text-[#F5B500]">(mais de 130 corridas)</div>
+                <div className="text-sm text-white/50 uppercase tracking-wider">Histórico</div>
               </div>
-              <div className="w-px bg-white/20" />
-              <div>
-                <div className="text-4xl font-display font-bold text-white">50K</div>
-                <div className="text-sm text-white/50 uppercase tracking-wider">Km Corridos</div>
-              </div>
+
             </div>
           </div>
 
@@ -265,9 +261,9 @@ export function HeroPremium() {
           >
             <TelemetryUI
               rpm={12500}
-              speed={185}
-              gear={5}
-              lapTime="1:23.456"
+              speed={125}
+              gear={0}
+              lapTime="0.46.45"
               position={1}
               color="#2E6A9C"
             />

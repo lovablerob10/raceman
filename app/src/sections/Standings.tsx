@@ -39,18 +39,18 @@ const getInitials = (name: string): string => {
 };
 
 const podiumData = [
-  { position: 2, name: 'Paulo Souza', points: 120, category: 'Light' },
-  { position: 1, name: 'Pedro Henrique', points: 145, category: 'Light', highlight: true },
-  { position: 3, name: 'Carlos Eduardo', points: 110, category: 'Pro' },
+  { position: 2, name: 'Ademir Alcântara', points: 0, category: 'Prata' },
+  { position: 1, name: 'Alessandro Rodolpho', points: 0, category: 'Ouro', highlight: true },
+  { position: 3, name: 'Cauê Aro', points: 0, category: 'Prata' },
 ];
 
 const standingsData = [
-  { position: 1, category: 'Light', name: 'Pedro Henrique', points: 145, highlight: true },
-  { position: 2, category: 'Light', name: 'Paulo Souza', points: 120 },
-  { position: 3, category: 'Pro', name: 'Carlos Eduardo', points: 110 },
-  { position: 4, category: 'Light', name: 'Rodrigo Costa', points: 98 },
-  { position: 5, category: 'Pro', name: 'Renan Farah', points: 95 },
-  { position: 6, category: 'Pro', name: 'Rodrigo Berger', points: 82 },
+  { position: 1, category: 'Ouro', name: 'Alessandro Rodolpho', points: 0, highlight: true },
+  { position: 2, category: 'Prata', name: 'Ademir Alcântara', points: 0 },
+  { position: 3, category: 'Prata', name: 'Cauê Aro', points: 0 },
+  { position: 4, category: 'Ouro', name: 'Cesar David', points: 0 },
+  { position: 5, category: 'Prata', name: 'Cristiano Aro', points: 0 },
+  { position: 6, category: 'Ouro', name: 'Douglas Michilino', points: 0 },
 ];
 
 // Avatar component with fallback
@@ -367,97 +367,107 @@ export function Standings() {
         </div>
 
         {/* Premium Standings Table */}
-        <div
-          ref={tableRef}
-          className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] bg-white/5 backdrop-blur-2xl border border-white/10"
-        >
-          {/* Table Header - Racing Stripe style */}
-          <div className="flex bg-gradient-to-r from-[#2E6A9C] via-[#0D0D0D] to-[#F5B500] text-white font-display text-xl md:text-2xl uppercase italic py-5 px-6 tracking-wider" style={{ fontFamily: 'Teko, sans-serif' }}>
-            <div className="w-20 text-center">POS</div>
-            <div className="w-24 text-center hidden sm:block border-l border-white/20">CAT</div>
-            <div className="flex-1 pl-8 border-l border-white/20">PILOTO</div>
-            <div className="w-32 text-right pr-6 border-l border-white/20">TOTAL PONTOS</div>
+        {standingsData.reduce((acc, curr) => acc + curr.points, 0) === 0 ? (
+          <div className="max-w-5xl mx-auto rounded-3xl p-20 text-center bg-white/5 backdrop-blur-2xl border border-white/10">
+            <TrendingUp size={64} className="text-[#F5B500] mx-auto mb-6 opacity-20" />
+            <h3 className="text-4xl font-display font-black uppercase italic text-white/40 mb-4" style={{ fontFamily: 'Teko, sans-serif' }}>
+              A Classificação Geral será liberada após o término da 1ª Etapa
+            </h3>
+            <p className="text-white/20 uppercase tracking-[0.3em] font-bold">Grid de Titulares em Aquecimento</p>
           </div>
+        ) : (
+          <div
+            ref={tableRef}
+            className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] bg-white/5 backdrop-blur-2xl border border-white/10"
+          >
+            {/* Table Header - Racing Stripe style */}
+            <div className="flex bg-gradient-to-r from-[#2E6A9C] via-[#0D0D0D] to-[#F5B500] text-white font-display text-xl md:text-2xl uppercase italic py-5 px-6 tracking-wider" style={{ fontFamily: 'Teko, sans-serif' }}>
+              <div className="w-20 text-center">POS</div>
+              <div className="w-24 text-center hidden sm:block border-l border-white/20">CAT</div>
+              <div className="flex-1 pl-8 border-l border-white/20">PILOTO</div>
+              <div className="w-32 text-right pr-6 border-l border-white/20">TOTAL PONTOS</div>
+            </div>
 
-          {/* Rows */}
-          <div className="divide-y divide-white/5">
-            {standingsData.map((item, index) => (
-              <div
-                key={item.name}
-                className={`
+            {/* Rows */}
+            <div className="divide-y divide-white/5">
+              {standingsData.map((item, index) => (
+                <div
+                  key={item.name}
+                  className={`
                   standings-row relative group flex items-center py-5 px-6 
                   transition-all duration-500
                   hover:bg-white/[0.07]
                   ${item.highlight ? 'bg-[#F5B500]/5' : ''}
                 `}
-              >
-                {/* Position Marker */}
-                <div className={`
+                >
+                  {/* Position Marker */}
+                  <div className={`
                   w-20 text-center font-display font-black text-3xl italic tracking-tighter leading-none
                   ${item.position === 1 ? 'text-[#F5B500] drop-shadow-[0_0_8px_#F5B500]' :
-                    item.position === 2 ? 'text-gray-400' :
-                      item.position === 3 ? 'text-[#2E6A9C]' :
-                        'text-white/40'
-                  }
+                      item.position === 2 ? 'text-gray-400' :
+                        item.position === 3 ? 'text-[#2E6A9C]' :
+                          'text-white/40'
+                    }
                 `} style={{ fontFamily: 'Teko, sans-serif' }}>
-                  #{item.position.toString().padStart(2, '0')}
-                </div>
-
-                {/* Category Badge */}
-                <div className="w-24 text-center hidden sm:block">
-                  <span className={`
-                    text-[10px] font-black px-2.5 py-1 rounded skew-x-[-15deg] uppercase tracking-widest
-                    ${item.category === 'Pro' ? 'bg-[#F5B500] text-black' : 'bg-gray-700 text-gray-300'}
-                  `}>
-                    <span className="inline-block skew-x-[15deg]">{item.category}</span>
-                  </span>
-                </div>
-
-                {/* Pilot Identity */}
-                <div className="flex-1 pl-8 flex items-center">
-                  <div className="relative group-hover:scale-110 transition-transform duration-300">
-                    <PilotAvatar
-                      name={item.name}
-                      size="sm"
-                      position={item.position}
-                      showBorder={index < 3}
-                    />
-                    {item.highlight && <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#F5B500] rounded-full animate-ping" />}
+                    #{item.position.toString().padStart(2, '0')}
                   </div>
-                  <div className="ml-4">
+
+                  {/* Category Badge */}
+                  <div className="w-24 text-center hidden sm:block">
                     <span className={`
+                    text-[10px] font-black px-2.5 py-1 rounded skew-x-[-15deg] uppercase tracking-widest
+                    ${item.category === 'Ouro' ? 'bg-[#F5B500] text-black' : 'bg-gray-700 text-gray-300'}
+                  `}>
+                      <span className="inline-block skew-x-[15deg]">{item.category}</span>
+                    </span>
+                  </div>
+
+                  {/* Pilot Identity */}
+                  <div className="flex-1 pl-8 flex items-center">
+                    <div className="relative group-hover:scale-110 transition-transform duration-300">
+                      <PilotAvatar
+                        name={item.name}
+                        size="sm"
+                        position={item.position}
+                        showBorder={index < 3}
+                      />
+                      {item.highlight && <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#F5B500] rounded-full animate-ping" />}
+                    </div>
+                    <div className="ml-4">
+                      <span className={`
                       block font-display text-xl uppercase italic tracking-wide transition-colors
                       ${item.highlight ? 'text-white font-black' : 'text-white/80 group-hover:text-white'}
                     `} style={{ fontFamily: 'Teko, sans-serif' }}>
-                      {item.name}
-                    </span>
-                    <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest leading-none">Scuderia RKT</span>
+                        {item.name}
+                      </span>
+                      <span className="text-[10px] text-white/40 uppercase font-bold tracking-widest leading-none">Scuderia RKT</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Points Counter */}
-                <div className={`
+                  {/* Points Counter */}
+                  <div className={`
                   w-32 text-right pr-6 font-display text-3xl italic font-black tracking-tighter transition-all duration-300
                   ${item.highlight ? 'text-[#F5B500] scale-110' : 'text-white/60 group-hover:text-white'}
                 `} style={{ fontFamily: 'Teko, sans-serif' }}>
-                  {animatedPoints[index]} <span className="text-xs ml-1 opacity-50 not-italic uppercase">Pts</span>
+                    {animatedPoints[index]} <span className="text-xs ml-1 opacity-50 not-italic uppercase">Pts</span>
+                  </div>
+
+                  {/* Row Hover Line */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F5B500] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 shadow-[0_0_10px_#F5B500]" />
                 </div>
+              ))}
+            </div>
 
-                {/* Row Hover Line */}
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F5B500] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 shadow-[0_0_10px_#F5B500]" />
-              </div>
-            ))}
+            {/* Table Footer - High Tech Link */}
+            <div className="py-6 text-center bg-black/40 backdrop-blur-md border-t border-white/10 group/footer overflow-hidden relative">
+              <button className="relative z-10 text-white font-display font-black uppercase text-xl leading-none italic tracking-widest flex items-center justify-center gap-3 mx-auto transition-all duration-500 hover:gap-6" style={{ fontFamily: 'Teko, sans-serif' }}>
+                Ver Relatório de Temporada Completo
+                <TrendingUp size={24} className="text-[#F5B500]" />
+              </button>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F5B500]/5 to-transparent -translate-x-full group-hover/footer:translate-x-full transition-transform duration-1000" />
+            </div>
           </div>
-
-          {/* Table Footer - High Tech Link */}
-          <div className="py-6 text-center bg-black/40 backdrop-blur-md border-t border-white/10 group/footer overflow-hidden relative">
-            <button className="relative z-10 text-white font-display font-black uppercase text-xl leading-none italic tracking-widest flex items-center justify-center gap-3 mx-auto transition-all duration-500 hover:gap-6" style={{ fontFamily: 'Teko, sans-serif' }}>
-              Ver Relatório de Temporada Completo
-              <TrendingUp size={24} className="text-[#F5B500]" />
-            </button>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F5B500]/5 to-transparent -translate-x-full group-hover/footer:translate-x-full transition-transform duration-1000" />
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Decorative side lines */}

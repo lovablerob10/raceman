@@ -332,7 +332,7 @@ export function Calendar() {
                       </button>
                     ) : (
                       <span className="text-xs font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">
-                        ETAPA CONCLUÍDA
+                        {/* ETAPA CONCLUÍDA */}
                       </span>
                     )}
                   </div>

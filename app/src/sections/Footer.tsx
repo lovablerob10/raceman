@@ -160,7 +160,7 @@ export function Footer() {
               </a>
 
               <a
-                href="tel:+5519974154676"
+                href="tel:+5519994173926"
                 className="group flex items-start gap-4"
               >
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/50 transition-all duration-300 group-hover:bg-[#F5B500]/10 group-hover:text-[#F5B500] group-hover:border-[#F5B500]/30">
@@ -168,7 +168,7 @@ export function Footer() {
                 </div>
                 <div>
                   <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">WhatsApp</div>
-                  <div className="text-white/80 font-bold">(19) 97415-4676</div>
+                  <div className="text-white/80 font-bold">(19) 99417-3926</div>
                 </div>
               </a>
 
@@ -178,7 +178,7 @@ export function Footer() {
                 </div>
                 <div>
                   <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">Localização</div>
-                  <div className="text-white/80 font-bold">Paulínia, SP - Brasil</div>
+                  <div className="text-white/80 font-bold text-sm">Rod. Anhanguera, KM 116 acesso via Marginal s/n 330 - Jardim das Palmeiras, Nova Odessa - SP, 13460-000</div>
                 </div>
               </div>
             </div>

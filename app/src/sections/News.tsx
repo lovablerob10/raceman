@@ -149,11 +149,13 @@ export function News() {
           </div>
 
           <a
-            href="#"
-            className="group inline-flex items-center gap-4 bg-white/5 hover:bg-[#F5B500] text-white px-8 py-3 rounded-xl border border-white/10 hover:border-[#F5B500] transition-all duration-500 shadow-2xl backdrop-blur-md"
+            href="https://www.instagram.com/rkt_raceman/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-4 bg-[#F5B500]/10 hover:bg-[#F5B500] text-[#F5B500] hover:text-black px-8 py-3 rounded-xl border border-[#F5B500]/30 transition-all duration-500 shadow-2xl backdrop-blur-md"
             style={{ fontFamily: 'Teko, sans-serif' }}
           >
-            <span className="text-2xl font-bold uppercase italic tracking-wider">Ver Arquivo Completo</span>
+            <span className="text-2xl font-bold uppercase italic tracking-wider">Siga no Instagram</span>
             <ArrowRight className="group-hover:translate-x-2 transition-transform" size={24} />
           </a>
         </div>
